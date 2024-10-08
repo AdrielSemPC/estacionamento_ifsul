@@ -13,12 +13,12 @@ import java.util.Date;
 public class RegEntradaSaida {
     private int ID;
     private Date data;
-    private TipoEntradaSaida entradasaida;
+    private TipoEntradaSaida entradaSaida;
     
     private Veiculo veiculo;
 
     public RegEntradaSaida(TipoEntradaSaida movimentacao, Veiculo veiculo){
-        entradasaida = movimentacao;
+        entradaSaida = movimentacao;
         this.veiculo = veiculo;
         data = new Date();
     }
@@ -40,11 +40,11 @@ public class RegEntradaSaida {
     }
 
     public TipoEntradaSaida getEntradasaida() {
-        return entradasaida;
+        return entradaSaida;
     }
 
-    public void setEntradasaida(TipoEntradaSaida entradasaida) {
-        this.entradasaida = entradasaida;
+    public void setEntradasaida(TipoEntradaSaida entradaSaida) {
+        this.entradaSaida = entradaSaida;
     }
 
     public Veiculo getVeiculo() {
