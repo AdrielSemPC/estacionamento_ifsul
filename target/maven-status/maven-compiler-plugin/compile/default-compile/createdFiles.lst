@@ -10,6 +10,4 @@ model\Pessoa.class
 model\VeiculoOficial.class
 model\Modelo.class
 model\TipoEntradaSaida.class
-model\Veiculo_.class
 model\TipoVeiculo.class
-model\Modelo_.class

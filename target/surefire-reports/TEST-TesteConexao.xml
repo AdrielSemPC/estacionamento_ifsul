@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="TestePersistencia" time="0.203" tests="1" errors="1" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="TesteConexao" time="3.066" tests="1" errors="1" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -59,7 +59,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="hello" classname="TestePersistencia" time="0.0">
+  <testcase name="testeConexao" classname="TesteConexao" time="0.006">
     <error message="Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]" type="org.hibernate.service.spi.ServiceException"><![CDATA[org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
 	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:275)
 	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
@@ -77,7 +77,7 @@
 	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:55)
 	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:39)
 	at lpoo_sistemaestacionamentoifsul.estacionamentoifsul.dao.PersistenciaJPA.<init>(PersistenciaJPA.java:18)
-	at TestePersistencia.<init>(TestePersistencia.java:23)
+	at TesteConexao.<init>(TesteConexao.java:19)
 	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:501)
 	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:485)
@@ -133,23 +133,29 @@ Caused by: org.postgresql.util.PSQLException: FATAL: autenticação do tipo senh
 	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:38)
 	... 54 more
 ]]></error>
-    <system-err><![CDATA[out. 29, 2024 12:05:06 AM org.hibernate.ejb.HibernatePersistence logDeprecation
+    <system-err><![CDATA[out. 29, 2024 12:05:03 AM org.hibernate.ejb.HibernatePersistence logDeprecation
 WARN: HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
-out. 29, 2024 12:05:06 AM org.hibernate.ejb.HibernatePersistence logDeprecation
+out. 29, 2024 12:05:03 AM org.hibernate.ejb.HibernatePersistence logDeprecation
 WARN: HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
-out. 29, 2024 12:05:06 AM org.hibernate.jpa.internal.util.LogHelper logPersistenceUnitInformation
+out. 29, 2024 12:05:03 AM org.hibernate.jpa.internal.util.LogHelper logPersistenceUnitInformation
 INFO: HHH000204: Processing PersistenceUnitInfo [
 	name: PU_LPOO_SISTEMAESTACIONAMENTO
 	...]
-out. 29, 2024 12:05:06 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+out. 29, 2024 12:05:03 AM org.hibernate.Version logVersion
+INFO: HHH000412: Hibernate Core {5.3.3.Final}
+out. 29, 2024 12:05:03 AM org.hibernate.cfg.Environment <clinit>
+INFO: HHH000206: hibernate.properties not found
+out. 29, 2024 12:05:03 AM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+INFO: HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+out. 29, 2024 12:05:03 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
 WARN: HHH10001002: Using Hibernate built-in connection pool (not for production use!)
-out. 29, 2024 12:05:06 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+out. 29, 2024 12:05:03 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/db_lpoo_estacionamentoIFSUL]
-out. 29, 2024 12:05:06 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+out. 29, 2024 12:05:03 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH10001001: Connection properties: {user=postgres, password=****}
-out. 29, 2024 12:05:06 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+out. 29, 2024 12:05:03 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH10001003: Autocommit mode: false
-out. 29, 2024 12:05:06 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections <init>
+out. 29, 2024 12:05:03 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections <init>
 INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
 out. 29, 2024 12:05:06 AM org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator initiateService
 WARN: HHH000342: Could not obtain connection to query metadata : Cannot invoke "org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.poll()" because "this.pool" is null

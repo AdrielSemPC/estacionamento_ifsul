@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
-Test set: TestePersistencia
+Test set: TesteConexao
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.203 s <<< FAILURE! -- in TestePersistencia
-TestePersistencia.hello -- Time elapsed: 0 s <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 3.066 s <<< FAILURE! -- in TesteConexao
+TesteConexao.testeConexao -- Time elapsed: 0.006 s <<< ERROR!
 org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
 	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:275)
 	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
@@ -20,7 +20,7 @@ org.hibernate.service.spi.ServiceException: Unable to create requested service [
 	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:55)
 	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:39)
 	at lpoo_sistemaestacionamentoifsul.estacionamentoifsul.dao.PersistenciaJPA.<init>(PersistenciaJPA.java:18)
-	at TestePersistencia.<init>(TestePersistencia.java:23)
+	at TesteConexao.<init>(TesteConexao.java:19)
 	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:501)
 	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:485)

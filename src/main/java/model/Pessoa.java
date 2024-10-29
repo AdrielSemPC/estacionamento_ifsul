@@ -6,14 +6,27 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  *
  * @author 20241PF.CC0029
  */
-public class Pessoa {
+
+@Entity
+@Table(name = "tb_pessoa")
+public class Pessoa implements Serializable{
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id
     private int ID;
-    private String nome, telefone, email;
+    @Column(name = "nome", length = 50, nullable = false)
+    private String nome;
+    @Column(name = "telefone", length = 11, nullable = false)
+    private String telefone;
+    @Column(name = "email", length = 50)
+    private String email;
+    @Enumerated(EnumType.STRING)
     private VinculoPessoa vinculoPessoa;
 
     private List<Veiculo> listaVeiculos;
