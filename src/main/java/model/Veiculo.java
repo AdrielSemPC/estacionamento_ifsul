@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import javax.print.DocFlavor.STRING;
+import org.hibernate.annotations.ManyToAny;
 
 /**
  *
@@ -21,8 +22,10 @@ public class Veiculo implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
     private int ID;
+    
     @Column(nullable = false, length = 7)
     private String placa;
+    
     @Column(nullable = false, length = 25)
     private String cor;
     
@@ -33,9 +36,12 @@ public class Veiculo implements Serializable {
     @Enumerated(EnumType.STRING)
     private TipoVeiculo tipo;
     
-//    private List<RegEntradaSaida> listaRegEntradaSaida;
+    @OneToMany
+    private List<RegEntradaSaida> listaRegEntradaSaida;
     
-//    private Pessoa proprietario;
+    @ManyToOne
+    @JoinColumn(name = "veiculo_proprietario")
+    private Pessoa proprietario;
     
     public Veiculo(){
 //        listaRegEntradaSaida = new ArrayList<>();
@@ -87,20 +93,20 @@ public class Veiculo implements Serializable {
         this.tipo = tipo;
     }
     
-//    public void addEntradaSaida(RegEntradaSaida entradasaida){
-//        listaRegEntradaSaida.add(entradasaida);
-//    }
-//
-//    public Pessoa getProprietario() {
-//        return proprietario;
-//    }
-//
-//    public void setProprietario(Pessoa proprietario) {
-//        this.proprietario = proprietario;
-//    }
+    public void addEntradaSaida(RegEntradaSaida entradasaida){
+        listaRegEntradaSaida.add(entradasaida);
+    }
 
-//    public List<RegEntradaSaida> getListaRegEntradaSaida() {
-//        return listaRegEntradaSaida;
-//    }
+    public Pessoa getProprietario() {
+        return proprietario;
+    }
+
+    public void setProprietario(Pessoa proprietario) {
+        this.proprietario = proprietario;
+    }
+
+    public List<RegEntradaSaida> getListaRegEntradaSaida() {
+        return listaRegEntradaSaida;
+    }
     
 }

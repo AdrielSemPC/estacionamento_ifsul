@@ -56,6 +56,15 @@ public class PersistenciaJPA implements InterfaceBD{
     
     @Override
     public void remover(Object o) throws Exception{
-    
+        entity = getEntityManager();
+        try {
+            entity.getTransaction().begin();
+            entity.remove(o);
+            entity.getTransaction().commit();
+        } catch (Exception e) {
+            if (entity.getTransaction().isActive()) {
+                entity.getTransaction().rollback();
+            }
+        }
     }
 }

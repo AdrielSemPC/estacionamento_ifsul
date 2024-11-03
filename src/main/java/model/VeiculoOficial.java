@@ -4,10 +4,15 @@
  */
 package model;
 
+import javax.persistence.*;
+
 /**
  *
  * @author 20241PF.CC0029
  */
+
+@Entity
+@DiscriminatorValue("OFICIAL")
 public class VeiculoOficial extends Veiculo{
     private String renavan, chassi;
 

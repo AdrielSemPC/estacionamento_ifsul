@@ -8,8 +8,12 @@ import java.util.logging.Logger;
 import lpoo_sistemaestacionamentoifsul.estacionamentoifsul.dao.PersistenciaJPA;
 import model.Marca;
 import model.Modelo;
+import model.Pessoa;
+import model.RegEntradaSaida;
+import model.TipoEntradaSaida;
 import model.TipoVeiculo;
 import model.Veiculo;
+import model.VinculoPessoa;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,17 +48,28 @@ public class TestePersistencia {
     @Test
     public void hello() {
         Modelo m = new Modelo();
-        m.setDescricao("Crossfox");
+        m.setDescricao("Fox");
         m.setMarca(Marca.FORD);
         
         Veiculo t = new Veiculo();
+        t.setModelo(m);
         t.setCor("PRATA");
         t.setPlaca("ABC4E67");
         t.setTipo(TipoVeiculo.CARRO);
         
+        RegEntradaSaida res = new RegEntradaSaida(TipoEntradaSaida.SAIDA, t);
+        
+        Pessoa p = new Pessoa();
+        p.setNome("Vanderlei");
+        p.setVinculoPessoa(VinculoPessoa.VISITANTE);
+        
+        t.setProprietario(p);
+        
         try {
             jpa.persist(m);
             jpa.persist(t);
+            jpa.persist(res);
+            jpa.persist(p);
         } catch (Exception ex) {
             Logger.getLogger(TestePersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
