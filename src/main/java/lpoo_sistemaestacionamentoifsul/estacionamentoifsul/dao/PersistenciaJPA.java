@@ -4,7 +4,9 @@
  */
 package lpoo_sistemaestacionamentoifsul.estacionamentoifsul.dao;
 
+import java.util.List;
 import javax.persistence.*;
+import model.*;
 
 /**
  *
@@ -66,5 +68,18 @@ public class PersistenciaJPA implements InterfaceBD{
                 entity.getTransaction().rollback();
             }
         }
+    }
+    
+    //funções para listar dados
+    public List<Pessoa> getPessoas(){
+        entity = getEntityManager();
+        try{
+            TypedQuery<Pessoa> query = entity.createQuery("Select p from Pessoa p", Pessoa.class);
+            return query.getResultList();
+        }catch (Exception e){
+            System.err.println("Erro ao buscar Pessoas: " + e);
+            return null;
+        }
+        
     }
 }
