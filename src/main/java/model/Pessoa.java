@@ -96,4 +96,8 @@ public class Pessoa implements Serializable{
         return listaVeiculos;
     }
     
+    @Override
+    public String toString(){
+        return "Nome: "+nome+"     ||        Vínculo: "+vinculoPessoa;
+    }
 }

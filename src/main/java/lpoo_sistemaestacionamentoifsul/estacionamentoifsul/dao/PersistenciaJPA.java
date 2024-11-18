@@ -82,4 +82,31 @@ public class PersistenciaJPA implements InterfaceBD{
         }
         
     }
+    
+    public List<Pessoa> getVFiltrados(VinculoPessoa vinculo){
+        entity = getEntityManager();
+        try{
+            TypedQuery<Pessoa> query = entity.createQuery("Select p from Pessoa p where p.vinculoPessoa = :vinculo", Pessoa.class);
+            query.setParameter("vinculo", vinculo);
+            return query.getResultList();
+        }catch (Exception e){
+            System.err.println("Erro ao buscar Pessoas: " + e);
+            return null;
+        }
+    }
+    
+        public List<Pessoa> getNFiltrados(String nome){
+        entity = getEntityManager();
+        if(nome.length() == 0){
+            return null;
+        }
+        try{
+            TypedQuery<Pessoa> query = entity.createQuery("Select p from Pessoa p where p.nome like :nome", Pessoa.class);
+            query.setParameter("nome", "%"+nome+"%");
+            return query.getResultList();
+        }catch (Exception e){
+            System.err.println("Erro ao buscar Pessoas: " + e);
+            return null;
+        }
+    }
 }

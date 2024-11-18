@@ -7,6 +7,7 @@ package lpoo_sistemaestacionamentoifsul.estacionamentoifsul.menu;
 import java.util.logging.Level;
 import lpoo_sistemaestacionamentoifsul.estacionamentoifsul.dao.PersistenciaJPA;
 import model.Pessoa;
+import model.VinculoPessoa;
 import org.jboss.logging.Logger;
 
 /**
@@ -33,6 +34,7 @@ public class TelaCadastroPessoa extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         jpa = new PersistenciaJPA();
+        carregarCombobox();
     }
 
     /**
@@ -53,9 +55,12 @@ public class TelaCadastroPessoa extends javax.swing.JDialog {
         textoEmail = new javax.swing.JTextField();
         botaoSalvar = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
+        cmbVinculo = new javax.swing.JComboBox<>();
+        labelVinculo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        labelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelTitulo.setText("Cadastro de Pessoa");
 
         labelNome.setText("Nome:");
@@ -84,6 +89,8 @@ public class TelaCadastroPessoa extends javax.swing.JDialog {
             }
         });
 
+        labelVinculo.setText("Vínculo:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,10 +103,6 @@ public class TelaCadastroPessoa extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textoFone))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelEmail)
-                        .addGap(18, 18, 18)
-                        .addComponent(textoEmail))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(labelNome)
                         .addGap(18, 18, 18)
                         .addComponent(textoNome))
@@ -109,7 +112,15 @@ public class TelaCadastroPessoa extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(botaoSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                        .addComponent(botaoCancelar)))
+                        .addComponent(botaoCancelar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelEmail)
+                            .addComponent(labelVinculo))
+                        .addGap(11, 11, 11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textoEmail)
+                            .addComponent(cmbVinculo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -129,7 +140,11 @@ public class TelaCadastroPessoa extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelEmail)
                     .addComponent(textoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbVinculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelVinculo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoSalvar)
                     .addComponent(botaoCancelar))
@@ -152,6 +167,7 @@ public class TelaCadastroPessoa extends javax.swing.JDialog {
         pessoa.setNome(textoNome.getText());
         pessoa.setEmail(textoEmail.getText());
         pessoa.setTelefone(textoFone.getText());
+        pessoa.setVinculoPessoa((VinculoPessoa)cmbVinculo.getSelectedItem());
         
         jpa.conexaoAberta();
         try {
@@ -213,12 +229,21 @@ public class TelaCadastroPessoa extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCancelar;
     private javax.swing.JButton botaoSalvar;
+    private javax.swing.JComboBox<VinculoPessoa> cmbVinculo;
     private javax.swing.JLabel labelEmail;
     private javax.swing.JLabel labelFone;
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelTitulo;
+    private javax.swing.JLabel labelVinculo;
     private javax.swing.JTextField textoEmail;
     private javax.swing.JTextField textoFone;
     private javax.swing.JTextField textoNome;
     // End of variables declaration//GEN-END:variables
+
+    private void carregarCombobox() {
+        cmbVinculo.addItem(VinculoPessoa.ESTUDANTE);
+        cmbVinculo.addItem(VinculoPessoa.SERVIDOR);
+        cmbVinculo.addItem(VinculoPessoa.TERCEIRIZADO);
+        cmbVinculo.addItem(VinculoPessoa.VISITANTE);
+    }
 }
