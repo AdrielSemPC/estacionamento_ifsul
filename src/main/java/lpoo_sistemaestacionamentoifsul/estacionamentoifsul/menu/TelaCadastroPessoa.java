@@ -25,6 +25,10 @@ public class TelaCadastroPessoa extends javax.swing.JDialog {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+        textoNome.setText(pessoa.getNome());
+        textoFone.setText(pessoa.getTelefone());
+        textoEmail.setText(pessoa.getEmail());
+        cmbVinculo.setSelectedItem(pessoa.getVinculoPessoa());
     }
     
     /**
@@ -68,12 +72,6 @@ public class TelaCadastroPessoa extends javax.swing.JDialog {
         labelFone.setText("Telefone:");
 
         labelEmail.setText("E-mail:");
-
-        textoNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoNomeActionPerformed(evt);
-            }
-        });
 
         botaoSalvar.setText("Salvar");
         botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -129,9 +127,9 @@ public class TelaCadastroPessoa extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(labelTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelNome)
-                    .addComponent(textoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelFone)
@@ -154,14 +152,9 @@ public class TelaCadastroPessoa extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoNomeActionPerformed
-
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
         if(pessoa == null){
             pessoa = new Pessoa();
-            
         }
         
         pessoa.setNome(textoNome.getText());
@@ -241,9 +234,9 @@ public class TelaCadastroPessoa extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void carregarCombobox() {
-        cmbVinculo.addItem(VinculoPessoa.ESTUDANTE);
-        cmbVinculo.addItem(VinculoPessoa.SERVIDOR);
-        cmbVinculo.addItem(VinculoPessoa.TERCEIRIZADO);
-        cmbVinculo.addItem(VinculoPessoa.VISITANTE);
+        cmbVinculo.removeAllItems();
+        for(VinculoPessoa v : VinculoPessoa.values()){
+            cmbVinculo.addItem(v);
+        }
     }
 }

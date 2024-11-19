@@ -41,6 +41,9 @@ public class PersistenciaJPA implements InterfaceBD{
         entity = getEntityManager();
         try{
             entity.getTransaction().begin();
+            if(!entity.contains(o)){
+                o = entity.merge(o);
+            }
             entity.persist(o);
             entity.getTransaction().commit();
         }
@@ -61,6 +64,9 @@ public class PersistenciaJPA implements InterfaceBD{
         entity = getEntityManager();
         try {
             entity.getTransaction().begin();
+            if(!entity.contains(o)){
+                o = entity.merge(o);
+            }
             entity.remove(o);
             entity.getTransaction().commit();
         } catch (Exception e) {
@@ -101,8 +107,8 @@ public class PersistenciaJPA implements InterfaceBD{
             return null;
         }
         try{
-            TypedQuery<Pessoa> query = entity.createQuery("Select p from Pessoa p where p.nome like :nome", Pessoa.class);
-            query.setParameter("nome", "%"+nome+"%");
+            TypedQuery<Pessoa> query = entity.createQuery("Select p from Pessoa p where lower(p.nome) like :nome", Pessoa.class);
+            query.setParameter("nome", "%"+nome.toLowerCase()+"%");
             return query.getResultList();
         }catch (Exception e){
             System.err.println("Erro ao buscar Pessoas: " + e);

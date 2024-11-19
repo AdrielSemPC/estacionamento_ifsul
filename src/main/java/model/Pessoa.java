@@ -98,6 +98,6 @@ public class Pessoa implements Serializable{
     
     @Override
     public String toString(){
-        return "Nome: "+nome+"     ||        Vínculo: "+vinculoPessoa;
+        return nome+"("+vinculoPessoa+")";
     }
 }

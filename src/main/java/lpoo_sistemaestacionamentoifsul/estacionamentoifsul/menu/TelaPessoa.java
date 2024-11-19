@@ -5,7 +5,9 @@
 package lpoo_sistemaestacionamentoifsul.estacionamentoifsul.menu;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import lpoo_sistemaestacionamentoifsul.estacionamentoifsul.dao.PersistenciaJPA;
+import model.Pessoa;
 import model.VinculoPessoa;
 import org.jboss.logging.Logger;
 
@@ -22,6 +24,7 @@ public class TelaPessoa extends javax.swing.JFrame {
         initComponents();
         
         jpa = new PersistenciaJPA();
+
         carregarPessoasCadastradas();
         carregarCombobox();
     }
@@ -43,7 +46,6 @@ public class TelaPessoa extends javax.swing.JFrame {
         cmbVinculo = new javax.swing.JComboBox<>();
         labelVinculo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        botaoReset = new javax.swing.JButton();
         areaBotoes = new javax.swing.JPanel();
         botaoNovo = new javax.swing.JButton();
         botaoEditar = new javax.swing.JButton();
@@ -75,13 +77,6 @@ public class TelaPessoa extends javax.swing.JFrame {
 
         jLabel1.setText("Filtragem:");
 
-        botaoReset.setText("Remover Filtragem");
-        botaoReset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoResetActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout areaFiltroLayout = new javax.swing.GroupLayout(areaFiltro);
         areaFiltro.setLayout(areaFiltroLayout);
         areaFiltroLayout.setHorizontalGroup(
@@ -96,16 +91,14 @@ public class TelaPessoa extends javax.swing.JFrame {
                         .addGroup(areaFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(areaFiltroLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(cmbVinculo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(203, Short.MAX_VALUE))
+                                .addComponent(textoNome))
                             .addGroup(areaFiltroLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(textoNome))))
+                                .addComponent(cmbVinculo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(203, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, areaFiltroLayout.createSequentialGroup()
-                        .addGroup(areaFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botaoReset, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jLabel1)
+                        .addContainerGap(350, Short.MAX_VALUE))))
         );
         areaFiltroLayout.setVerticalGroup(
             areaFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,8 +113,6 @@ public class TelaPessoa extends javax.swing.JFrame {
                 .addGroup(areaFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelVinculo)
                     .addComponent(cmbVinculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoReset)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -145,7 +136,7 @@ public class TelaPessoa extends javax.swing.JFrame {
                 .addComponent(labelTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(areaFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(35, 35, 35))
         );
 
         botaoNovo.setText("Novo");
@@ -156,8 +147,18 @@ public class TelaPessoa extends javax.swing.JFrame {
         });
 
         botaoEditar.setText("Editar");
+        botaoEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoEditarActionPerformed(evt);
+            }
+        });
 
         botaoRemover.setText("Remover");
+        botaoRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoRemoverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout areaBotoesLayout = new javax.swing.GroupLayout(areaBotoes);
         areaBotoes.setLayout(areaBotoesLayout);
@@ -192,7 +193,9 @@ public class TelaPessoa extends javax.swing.JFrame {
         );
         areaListagemLayout.setVerticalGroup(
             areaListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, areaListagemLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -215,8 +218,8 @@ public class TelaPessoa extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(areaCabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(areaCabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(areaListagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(areaBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -231,19 +234,56 @@ public class TelaPessoa extends javax.swing.JFrame {
         carregarPessoasCadastradas();
     }//GEN-LAST:event_botaoNovoActionPerformed
 
-    private void botaoResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoResetActionPerformed
-        carregarPessoasCadastradas();
-    }//GEN-LAST:event_botaoResetActionPerformed
-
     private void cmbVinculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVinculoActionPerformed
-        if(cmbVinculo!=null){
+        VinculoPessoa v = (VinculoPessoa)cmbVinculo.getSelectedItem();
+        if(v!=null){
             carregarPessoasVinculo((VinculoPessoa)cmbVinculo.getSelectedItem());
-        };
+        }else{
+            carregarPessoasCadastradas();
+        }
     }//GEN-LAST:event_cmbVinculoActionPerformed
 
     private void textoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoNomeActionPerformed
         carregarPessoasNome(textoNome.getText());
     }//GEN-LAST:event_textoNomeActionPerformed
+
+    private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
+        Pessoa p = listaPessoas.getSelectedValue();
+        if(p != null){
+            try{
+                jpa.conexaoAberta();
+                
+                int del = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover "+p.getNome()+"?");
+                
+                if(del == JOptionPane.YES_OPTION){
+                    
+                    jpa.remover(p);
+                    
+                }
+                
+                carregarPessoasCadastradas();
+                
+                jpa.fecharConexao();
+                
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(this, "Erro ao remover pessoa "+p+".\n" + e);
+            }
+        }
+    }//GEN-LAST:event_botaoRemoverActionPerformed
+
+    private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
+        Pessoa p = listaPessoas.getSelectedValue();
+        if(p!=null){
+            try{
+                TelaCadastroPessoa telaCadastro = new TelaCadastroPessoa(this,rootPaneCheckingEnabled);
+                telaCadastro.setPessoa(p);
+                telaCadastro.setVisible(true);
+                carregarPessoasCadastradas();
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Erro ao editar pessoa "+p+".\n" + e);
+            }
+        }
+    }//GEN-LAST:event_botaoEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -313,10 +353,11 @@ public class TelaPessoa extends javax.swing.JFrame {
     }
     
     private void carregarCombobox() {
-        cmbVinculo.addItem(VinculoPessoa.ESTUDANTE);
-        cmbVinculo.addItem(VinculoPessoa.SERVIDOR);
-        cmbVinculo.addItem(VinculoPessoa.TERCEIRIZADO);
-        cmbVinculo.addItem(VinculoPessoa.VISITANTE);
+        cmbVinculo.removeAllItems();
+        cmbVinculo.addItem(null);
+        for(VinculoPessoa v : VinculoPessoa.values()){
+            cmbVinculo.addItem(v);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -327,14 +368,13 @@ public class TelaPessoa extends javax.swing.JFrame {
     private javax.swing.JButton botaoEditar;
     private javax.swing.JButton botaoNovo;
     private javax.swing.JButton botaoRemover;
-    private javax.swing.JButton botaoReset;
     private javax.swing.JComboBox<VinculoPessoa> cmbVinculo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JLabel labelVinculo;
-    private javax.swing.JList<String> listaPessoas;
+    private javax.swing.JList<Pessoa> listaPessoas;
     private javax.swing.JTextField textoNome;
     // End of variables declaration//GEN-END:variables
 }
