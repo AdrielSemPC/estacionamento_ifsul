@@ -32,6 +32,7 @@ public class MainJFrame extends javax.swing.JFrame {
         barraMenu = new javax.swing.JMenuBar();
         miBotaoCadastro = new javax.swing.JMenu();
         miBotaoPessoa = new javax.swing.JMenuItem();
+        miBotaoVeiculo = new javax.swing.JMenuItem();
         miBotaoMovimentacao = new javax.swing.JMenu();
         miBotaoAjuda = new javax.swing.JMenu();
         miAjudaSobre = new javax.swing.JMenuItem();
@@ -60,6 +61,14 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
         miBotaoCadastro.add(miBotaoPessoa);
+
+        miBotaoVeiculo.setText("Veiculo");
+        miBotaoVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miBotaoVeiculoActionPerformed(evt);
+            }
+        });
+        miBotaoCadastro.add(miBotaoVeiculo);
 
         barraMenu.add(miBotaoCadastro);
 
@@ -113,6 +122,11 @@ public class MainJFrame extends javax.swing.JFrame {
         telaPessoa.setVisible(true);
     }//GEN-LAST:event_miBotaoPessoaActionPerformed
 
+    private void miBotaoVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miBotaoVeiculoActionPerformed
+        TelaVeiculo telaVeiculo = new TelaVeiculo();
+        telaVeiculo.setVisible(true);
+    }//GEN-LAST:event_miBotaoVeiculoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -156,5 +170,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JMenu miBotaoCadastro;
     private javax.swing.JMenu miBotaoMovimentacao;
     private javax.swing.JMenuItem miBotaoPessoa;
+    private javax.swing.JMenuItem miBotaoVeiculo;
     // End of variables declaration//GEN-END:variables
 }

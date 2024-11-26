@@ -212,7 +212,11 @@ public class TelaVeiculo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void textoPlacaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoPlacaKeyReleased
-        carregarVeiculosPlaca(textoPlaca.getText());
+        if(textoPlaca.getText().isEmpty()){
+            carregarVeiculosCadastrados();
+        }else{
+            carregarVeiculosPlaca(textoPlaca.getText());
+        }
     }//GEN-LAST:event_textoPlacaKeyReleased
 
     private void botaoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoNovoActionPerformed
@@ -237,7 +241,7 @@ public class TelaVeiculo extends javax.swing.JFrame {
 
     private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
         Veiculo v = listaVeiculos.getSelectedValue();
-        if(v!=null){
+        if(v != null){
             try{
                 jpa.conexaoAberta();
                 
@@ -248,6 +252,7 @@ public class TelaVeiculo extends javax.swing.JFrame {
                 }
                 
                 carregarVeiculosCadastrados();
+                
                 jpa.fecharConexao();
                 
             }catch (Exception e){

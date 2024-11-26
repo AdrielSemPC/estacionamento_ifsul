@@ -7,6 +7,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.*;
 
 /**
@@ -100,4 +101,32 @@ public class Pessoa implements Serializable{
     public String toString(){
         return nome+"("+vinculoPessoa+")";
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 73 * hash + this.ID;
+        hash = 73 * hash + Objects.hashCode(this.nome);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pessoa other = (Pessoa) obj;
+        if (this.ID != other.ID) {
+            return false;
+        }
+        return Objects.equals(this.nome, other.nome);
+    }
+    
+    
 }

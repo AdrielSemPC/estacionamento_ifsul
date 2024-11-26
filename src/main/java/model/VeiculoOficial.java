@@ -15,10 +15,8 @@ import javax.persistence.*;
 @DiscriminatorValue("OFICIAL")
 public class VeiculoOficial extends Veiculo{
     
-    @Column(nullable = false)
     private String renavan;
     
-    @Column(nullable = false)
     private String chassi;
 
     public String getRenavan() {
@@ -35,5 +33,11 @@ public class VeiculoOficial extends Veiculo{
 
     public void setChassi(String chassi) {
         this.chassi = chassi;
+    }
+    
+    
+    @Override
+    public String toString(){
+        return this.modelo.getDescricao()+"; Cor: "+this.cor+" - Placa: "+this.placa+" - Veículo: oficial";
     }
 }

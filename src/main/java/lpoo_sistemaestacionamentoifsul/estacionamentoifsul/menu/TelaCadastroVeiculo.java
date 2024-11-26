@@ -247,7 +247,6 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
             oficial.setPlaca(textoPlaca.getText());
             oficial.setCor(textoCor.getText());
             oficial.setModelo((Modelo)cmbModelo.getSelectedItem());
-            oficial.setProprietario((Pessoa)cmbProprietario.getSelectedItem());
             oficial.setTipo((TipoVeiculo)cmbTipoVeiculo.getSelectedItem());
             oficial.setChassi(textoChassi.getText());
             oficial.setRenavan(textoRenavan.getText());
@@ -382,9 +381,11 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
     
     public void verificaOficial(){
         if(cbOficial.isSelected()){
+            cmbProprietario.setEnabled(false);
             textoRenavan.setEnabled(true);
             textoChassi.setEnabled(true);
         }else{
+            cmbProprietario.setEnabled(true);
             textoRenavan.setEnabled(false);
             textoChassi.setEnabled(false);
         }

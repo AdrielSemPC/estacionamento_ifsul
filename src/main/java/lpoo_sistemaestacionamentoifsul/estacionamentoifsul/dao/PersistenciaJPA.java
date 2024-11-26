@@ -97,7 +97,7 @@ public class PersistenciaJPA implements InterfaceBD{
         }
         try{
             TypedQuery<Veiculo> query = entity.createQuery("Select v from Veiculo v where lower(v.placa) like :placa", Veiculo.class);
-            query.setParameter("placa", "%"+placa.toUpperCase()+"%");
+            query.setParameter("placa", "%"+placa.toLowerCase()+"%");
             return query.getResultList();
         }catch (Exception e){
             System.err.println("Erro ao buscar Veiculos: " + e);

@@ -7,6 +7,7 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.*;
 import javax.print.DocFlavor.STRING;
 import org.hibernate.annotations.ManyToAny;
@@ -21,27 +22,27 @@ import org.hibernate.annotations.ManyToAny;
 public class Veiculo implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
-    private int ID;
+    protected int ID;
     
     @Column(nullable = false, length = 7)
-    private String placa;
+    protected String placa;
     
     @Column(nullable = false, length = 25)
-    private String cor;
+    protected String cor;
     
     @ManyToOne
     @JoinColumn(name = "modelo_id")
-    private Modelo modelo;
+    protected Modelo modelo;
     
     @Enumerated(EnumType.STRING)
-    private TipoVeiculo tipo;
+    protected TipoVeiculo tipo;
     
     @OneToMany(mappedBy = "veiculo")
-    private List<RegEntradaSaida> listaRegEntradaSaida;
+    protected List<RegEntradaSaida> listaRegEntradaSaida;
     
     @ManyToOne
     @JoinColumn(name = "veiculo_proprietario")
-    private Pessoa proprietario;
+    protected Pessoa proprietario;
     
     public Veiculo(){
         listaRegEntradaSaida = new ArrayList<>();
@@ -49,7 +50,7 @@ public class Veiculo implements Serializable {
     
     @Override
     public String toString(){
-        return this.modelo.getDescricao()+"; Cor: ("+this.cor+") - Placa: ("+this.placa+")";
+        return this.modelo.getDescricao()+"; Cor: "+this.cor+" - Placa: "+this.placa+" - Veículo: privado";
     }
     
     public Veiculo(String placa, TipoVeiculo tipo){
@@ -113,5 +114,32 @@ public class Veiculo implements Serializable {
     public List<RegEntradaSaida> getListaRegEntradaSaida() {
         return listaRegEntradaSaida;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 61 * hash + this.ID;
+        hash = 61 * hash + Objects.hashCode(this.placa);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Veiculo other = (Veiculo) obj;
+        if (this.ID != other.ID) {
+            return false;
+        }
+        return Objects.equals(this.placa, other.placa);
+    }
+    
     
 }
