@@ -14,7 +14,12 @@ import javax.persistence.*;
 @Entity
 @DiscriminatorValue("OFICIAL")
 public class VeiculoOficial extends Veiculo{
-    private String renavan, chassi;
+    
+    @Column(nullable = false)
+    private String renavan;
+    
+    @Column(nullable = false)
+    private String chassi;
 
     public String getRenavan() {
         return renavan;
@@ -31,5 +36,4 @@ public class VeiculoOficial extends Veiculo{
     public void setChassi(String chassi) {
         this.chassi = chassi;
     }
-    
 }

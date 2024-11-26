@@ -4,6 +4,7 @@
  */
 package lpoo_sistemaestacionamentoifsul.estacionamentoifsul.dao;
 
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.*;
 import model.*;
@@ -77,6 +78,45 @@ public class PersistenciaJPA implements InterfaceBD{
     }
     
     //funções para listar dados
+    
+    public List<Veiculo> getVeiculos(){
+        entity = getEntityManager();
+        try{
+            TypedQuery<Veiculo> query = entity.createQuery("Select v from Veiculo v", Veiculo.class);
+            return query.getResultList();
+        }catch(Exception e){
+           System.err.println("Erro ao buscar Veiculos: " + e);
+           return null;
+        }
+    }
+    
+    public List<Veiculo> getVeiculosPlaca(String placa){
+        entity = getEntityManager();
+        if(placa.length() == 0){
+            return null;
+        }
+        try{
+            TypedQuery<Veiculo> query = entity.createQuery("Select v from Veiculo v where lower(v.placa) like :placa", Veiculo.class);
+            query.setParameter("placa", "%"+placa.toUpperCase()+"%");
+            return query.getResultList();
+        }catch (Exception e){
+            System.err.println("Erro ao buscar Veiculos: " + e);
+            return null;
+        }
+    }
+    
+     public List<VeiculoOficial> getVeiculosOficial(){
+        entity = getEntityManager();
+        try{
+            TypedQuery<VeiculoOficial> query = entity.createQuery("Select v from VeiculoOficial v", VeiculoOficial.class);
+            return query.getResultList();
+        }catch (Exception e){
+            System.err.println("Erro ao buscar Veiculos Oficiais: " + e);
+            return null;
+        }
+    }
+        
+    
     public List<Pessoa> getPessoas(){
         entity = getEntityManager();
         try{
@@ -89,7 +129,7 @@ public class PersistenciaJPA implements InterfaceBD{
         
     }
     
-    public List<Pessoa> getVFiltrados(VinculoPessoa vinculo){
+    public List<Pessoa> getPessoasVinculo(VinculoPessoa vinculo){
         entity = getEntityManager();
         try{
             TypedQuery<Pessoa> query = entity.createQuery("Select p from Pessoa p where p.vinculoPessoa = :vinculo", Pessoa.class);
@@ -101,7 +141,7 @@ public class PersistenciaJPA implements InterfaceBD{
         }
     }
     
-        public List<Pessoa> getNFiltrados(String nome){
+        public List<Pessoa> getPessoasNome(String nome){
         entity = getEntityManager();
         if(nome.length() == 0){
             return null;
@@ -109,6 +149,17 @@ public class PersistenciaJPA implements InterfaceBD{
         try{
             TypedQuery<Pessoa> query = entity.createQuery("Select p from Pessoa p where lower(p.nome) like :nome", Pessoa.class);
             query.setParameter("nome", "%"+nome.toLowerCase()+"%");
+            return query.getResultList();
+        }catch (Exception e){
+            System.err.println("Erro ao buscar Pessoas: " + e);
+            return null;
+        }
+    }
+
+    public List<Modelo> getModelos(){
+        entity = getEntityManager();
+        try{
+            TypedQuery<Modelo> query = entity.createQuery("Select m from Modelo m", Modelo.class);
             return query.getResultList();
         }catch (Exception e){
             System.err.println("Erro ao buscar Pessoas: " + e);

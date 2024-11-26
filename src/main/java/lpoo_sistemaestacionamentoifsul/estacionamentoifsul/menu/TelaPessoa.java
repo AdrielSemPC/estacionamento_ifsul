@@ -56,7 +56,7 @@ public class TelaPessoa extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        labelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelTitulo.setText("Pessoas Cadastradas");
 
         labelNome.setText("Nome:");
@@ -121,20 +121,21 @@ public class TelaPessoa extends javax.swing.JFrame {
         areaCabecalhoLayout.setHorizontalGroup(
             areaCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(areaCabecalhoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(areaFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(areaCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(areaCabecalhoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(areaFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(areaCabecalhoLayout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addComponent(labelTitulo)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, areaCabecalhoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelTitulo)
-                .addGap(125, 125, 125))
         );
         areaCabecalhoLayout.setVerticalGroup(
             areaCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(areaCabecalhoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(areaFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
@@ -202,9 +203,7 @@ public class TelaPessoa extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(areaCabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(areaCabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,7 +335,7 @@ public class TelaPessoa extends javax.swing.JFrame {
         jpa.conexaoAberta();
         
         DefaultListModel modeloLista = new DefaultListModel();
-        modeloLista.addAll(jpa.getVFiltrados(tipoVinculo));
+        modeloLista.addAll(jpa.getPessoasVinculo(tipoVinculo));
         listaPessoas.setModel(modeloLista);
         
         jpa.fecharConexao();
@@ -346,7 +345,7 @@ public class TelaPessoa extends javax.swing.JFrame {
         jpa.conexaoAberta();
         
         DefaultListModel modeloLista = new DefaultListModel();
-        modeloLista.addAll(jpa.getNFiltrados(nome));
+        modeloLista.addAll(jpa.getPessoasNome(nome));
         listaPessoas.setModel(modeloLista);
         
         jpa.fecharConexao();

@@ -36,7 +36,7 @@ public class Veiculo implements Serializable {
     @Enumerated(EnumType.STRING)
     private TipoVeiculo tipo;
     
-    @OneToMany
+    @OneToMany(mappedBy = "veiculo")
     private List<RegEntradaSaida> listaRegEntradaSaida;
     
     @ManyToOne
@@ -44,13 +44,18 @@ public class Veiculo implements Serializable {
     private Pessoa proprietario;
     
     public Veiculo(){
-//        listaRegEntradaSaida = new ArrayList<>();
+        listaRegEntradaSaida = new ArrayList<>();
+    }
+    
+    @Override
+    public String toString(){
+        return this.modelo.getDescricao()+"; Cor: ("+this.cor+") - Placa: ("+this.placa+")";
     }
     
     public Veiculo(String placa, TipoVeiculo tipo){
         this.placa = placa;
         this.tipo = tipo;
-//        listaRegEntradaSaida = new ArrayList<>();
+        listaRegEntradaSaida = new ArrayList<>();
     }
 
     public int getID() {

@@ -49,4 +49,8 @@ public class Modelo implements Serializable{
         this.marca = marca;
     }
     
+    
+    public String toString(){
+        return this.marca+" : "+this.getDescricao();
+    }
 }
