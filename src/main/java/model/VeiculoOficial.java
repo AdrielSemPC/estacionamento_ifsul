@@ -4,12 +4,20 @@
  */
 package model;
 
+import javax.persistence.*;
+
 /**
  *
  * @author 20241PF.CC0029
  */
+
+@Entity
+@DiscriminatorValue("OFICIAL")
 public class VeiculoOficial extends Veiculo{
-    private String renavan, chassi;
+    
+    private String renavan;
+    
+    private String chassi;
 
     public String getRenavan() {
         return renavan;
@@ -27,4 +35,9 @@ public class VeiculoOficial extends Veiculo{
         this.chassi = chassi;
     }
     
+    
+    @Override
+    public String toString(){
+        return this.modelo.getDescricao()+"; Cor: "+this.cor+" - Placa: "+this.placa+" - Veículo: oficial";
+    }
 }

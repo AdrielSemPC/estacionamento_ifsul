@@ -1,0 +1,13 @@
+model\Marca.class
+model\EntradaSaidaOficial.class
+model\VinculoPessoa.class
+model\Veiculo.class
+lpoo_sistemaestacionamentoifsul\estacionamentoifsul\dao\PersistenciaJPA.class
+model\RegEntradaSaida.class
+lpoo_sistemaestacionamentoifsul\estacionamentoifsul\dao\InterfaceBD.class
+lpoo_sistemaestacionamentoifsul\estacionamentoifsul\EstacionamentoIFSUL.class
+model\Pessoa.class
+model\VeiculoOficial.class
+model\Modelo.class
+model\TipoEntradaSaida.class
+model\TipoVeiculo.class

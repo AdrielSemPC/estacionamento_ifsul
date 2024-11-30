@@ -4,15 +4,23 @@
  */
 package model;
 
+import javax.persistence.*;
+
 /**
  *
  * @author 20241PF.CC0029
  */
-public class EntradaSaidaOficial extends RegEntradaSaida {
+
+@Entity
+@DiscriminatorValue("veiculo_oficial")
+public class RegESOficial extends RegEntradaSaida {
     private int quilometragemRegistrada;
+    
+    @OneToOne
+    @JoinColumn(name = "esoficial_motorista")
     private Pessoa motorista;
     
-    public EntradaSaidaOficial(TipoEntradaSaid tipo, Veiculo veiculo, Pessoa motorista){
+    public RegESOficial(TipoEntradaSaida tipo, Veiculo veiculo, Pessoa motorista){
         super(tipo, veiculo);
         this.motorista = motorista;
     }

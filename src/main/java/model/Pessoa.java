@@ -6,16 +6,35 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.*;
 
 /**
  *
  * @author 20241PF.CC0029
  */
-public class Pessoa {
+
+@Entity
+@Table(name = "tb_pessoa")
+public class Pessoa implements Serializable{
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id
     private int ID;
-    private String nome, telefone, email;
+    
+    @Column(name = "nome", length = 50, nullable = false)
+    private String nome;
+    
+    @Column(name = "telefone", length = 11, nullable = false)
+    private String telefone;
+    
+    @Column(name = "email", length = 50)
+    private String email;
+    
+    @Enumerated(EnumType.STRING)
     private VinculoPessoa vinculoPessoa;
 
+    @OneToMany(mappedBy = "proprietario", cascade = CascadeType.ALL)
     private List<Veiculo> listaVeiculos;
     
     public Pessoa(){
@@ -77,5 +96,37 @@ public class Pessoa {
     public List<Veiculo> getListaVeiculos() {
         return listaVeiculos;
     }
+    
+    @Override
+    public String toString(){
+        return nome+"("+vinculoPessoa+")";
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 73 * hash + this.ID;
+        hash = 73 * hash + Objects.hashCode(this.nome);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pessoa other = (Pessoa) obj;
+        if (this.ID != other.ID) {
+            return false;
+        }
+        return Objects.equals(this.nome, other.nome);
+    }
+    
     
 }

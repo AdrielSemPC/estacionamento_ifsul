@@ -1,0 +1,77 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
+ */
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import lpoo_sistemaestacionamentoifsul.estacionamentoifsul.dao.PersistenciaJPA;
+import model.Marca;
+import model.Modelo;
+import model.Pessoa;
+import model.RegEntradaSaida;
+import model.TipoEntradaSaida;
+import model.TipoVeiculo;
+import model.Veiculo;
+import model.VinculoPessoa;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+/**
+ *
+ * @author 20241pf.cc0029
+ */
+public class TestePersistencia {
+    PersistenciaJPA jpa = new PersistenciaJPA();
+    public TestePersistencia() {
+    }
+    
+    @Before
+    public void setUp() {
+        if(jpa.conexaoAberta()){
+            System.out.println("Conexão aberta.");
+        }
+        else{
+            System.out.println("Erro ao abrir conexão.");
+        }
+    }
+    
+    @After
+    public void tearDown() {
+        jpa.fecharConexao();
+    }
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+    @Test
+    public void hello() {
+        Modelo m = new Modelo();
+        m.setDescricao("Fox");
+        m.setMarca(Marca.FORD);
+        
+        Veiculo t = new Veiculo();
+        t.setModelo(m);
+        t.setCor("PRATA");
+        t.setPlaca("ABC4E67");
+        t.setTipo(TipoVeiculo.CARRO);
+        
+        RegEntradaSaida res = new RegEntradaSaida(TipoEntradaSaida.SAIDA, t);
+        
+        Pessoa p = new Pessoa();
+        p.setNome("Vanderlei");
+        p.setVinculoPessoa(VinculoPessoa.VISITANTE);
+        
+        t.setProprietario(p);
+        
+        try {
+            jpa.persist(m);
+            jpa.persist(t);
+            jpa.persist(res);
+            jpa.persist(p);
+        } catch (Exception ex) {
+            Logger.getLogger(TestePersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+}
